@@ -16,9 +16,9 @@ export class PostAppComponent {
       "carId": 0,
       "brand": "",
       "model": "",
-      "year": "",
+      "year": 0,
       "color": "",
-      "dailyRate": "",
+      "dailyRate": 0,
       "carImage": "",
       "RegNo": "",
     }
