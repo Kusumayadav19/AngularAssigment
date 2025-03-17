@@ -11,31 +11,33 @@ import { FormsModule } from '@angular/forms';
 })
 export class PostAppComponent {
   http = inject(HttpClient);
-  userList : any[] = []
-  busBooking : any = {
-      "userId": 0,
-      "userName": "",
-      "emailId": "",
-      "fullName": "",
-      "role": "",
-      "createdDate": "",
-      "password": "",
-      "projectName": "",
-      "refreshToken": "",
-      "refreshTokenExpiryTime": ""
+  carList : any[] = []
+  carObj : any = {
+      "carId": 0,
+      "brand": "",
+      "model": "",
+      "year": "",
+      "color": "",
+      "dailyRate": "",
+      "carImage": "",
+      "RegNo": "",
     }
 
-  getAllUsers(){
-    this.http.get("https://projectapi.gerasim.in/api/BusBooking/GetAllUsers").subscribe((result:any)=>{
-      this.userList = result.data
+  getAllCars(){
+    this.http.get("https://freeapi.miniprojectideas.com/api/CarRentalApp/GetCars").subscribe((result:any)=>{
+      this.carList = result.data
     })
   }
 
-  saveUser(){
-    this.http.post("https://projectapi.gerasim.in/api/BusBooking/AddNewUser",this.busBooking).subscribe((res:any)=>{
+  saveCar(){
+    debugger;
+    this.http.post("https://freeapi.miniprojectideas.com/api/CarRentalApp/UpdateCar",this.carObj).subscribe((res:any)=>{
+      debugger;
       if(res.result){
         alert("Add New User");
-        this.getAllUsers();
+        this.getAllCars();
+      }else{
+        alert(res.message)
       }
     })
   }
