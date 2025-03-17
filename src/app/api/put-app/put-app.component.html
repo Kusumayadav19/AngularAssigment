@@ -1,0 +1,89 @@
+<div class="row">
+    <div class="col-8 text-center">
+        <h2>Post API Integration Using Template Form</h2>
+    </div>
+    <div class="col-4">
+        <button class="btn btn-success" (click)="getAllUsers()">Get Bus Booking</button>
+    </div>
+</div>
+<div class="row">
+    <div class="col-6">
+        <table class="table table-bordered border-dark">
+            <thead class="table-dark">
+                <tr>
+                    <th>User Id</th>
+                    <th>User Name</th>
+                    <th>Email ID</th>
+                    <th>Role</th>
+                    <th>Project Name</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let user of userList; let i = index">
+                    <td>{{ user.userId }}</td>
+                    <td>{{ user.userName }}</td>
+                    <td>{{ user.emailId }}</td>
+                    <td>{{ user.role }}</td>
+                    <td>{{ user.projectName }}</td>
+                    <td>
+                        <button class="btn btn-success" (click)="onEdit($event)">Edit</button>
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<hr>
+
+<div class="container">
+    <div class="col-6 mt-2">
+        <label>User ID</label>
+        <input type="text" [(ngModel)]="busBooking.userId" class="form-control" placeholder="Enter User ID">
+    </div>
+    <div class="col-6 mt-2">
+        <label>User Name</label>
+        <input type="text" [(ngModel)]="busBooking.userName" class="form-control" placeholder="Enter User Name">
+    </div>
+    <div class="col-6 mt-2">
+        <label>Email ID</label>
+        <input type="email" [(ngModel)]="busBooking.emailId" class="form-control" placeholder="Enter Email ID">
+    </div>
+    <div class="col-6 mt-2">
+        <label>Full Name</label>
+        <input type="text" [(ngModel)]="busBooking.fullName" class="form-control" placeholder="Enter Full Name">
+    </div>
+    <div class="col-6 mt-2">
+        <label>Role</label>
+        <input type="text" [(ngModel)]="busBooking.role" class="form-control" placeholder="Enter Role">
+    </div>
+    <div class="col-6 mt-2">
+        <label>Created Date</label>
+        <input type="datetime-local" [(ngModel)]="busBooking.createdDate" class="form-control">
+    </div>
+    <div class="col-6 mt-2">
+        <label>Password</label>
+        <input type="password" [(ngModel)]="busBooking.password" class="form-control" placeholder="Enter Password">
+    </div>
+    <div class="col-6 mt-2">
+        <label>Project Name</label>
+        <input type="text" [(ngModel)]="busBooking.projectName" class="form-control" placeholder="Enter Project Name">
+    </div>
+    <div class="col-6 mt-2">
+        <label>Refresh Token</label>
+        <input type="text" [(ngModel)]="busBooking.refreshToken" class="form-control" placeholder="Enter Refresh Token">
+    </div>
+    <div class="col-6 mt-2">
+        <label>Refresh Token Expiry Time</label>
+        <input type="datetime-local" [(ngModel)]="busBooking.refreshTokenExpiryTime" class="form-control">
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12 mt-2 text-center">
+        <button class="btn btn-secondary m-2">Reset Form</button>
+        <button class="btn btn-success m-2" (click)="saveUser()">Save User</button>
+    </div>
+</div>

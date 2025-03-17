@@ -1,0 +1,64 @@
+
+<div class="container">
+    <h2>Reactive Form</h2>
+    <form class="row g-3 needs-validation" (ngSubmit)="onUserSave()" [formGroup]="userForm">
+        <div class="col-md-4">
+          <label >First name</label>
+          <input type="text" formControlName="fName" class="form-control">
+          <div class="text-danger">
+            @if(userForm.controls['fName'].errors?.['required'] && userForm.controls['fName'].touched){
+                <span>This is Required</span>
+            }
+          </div>
+        </div>
+        <div class="col-md-4">
+          <label >Last name</label>
+          <input type="text" formControlName="lName" class="form-control">
+            <div class="text-danger">
+                <span *ngIf="userForm.controls['lName'].errors?.['required'] && userForm.controls['lName'].touched">This is Required</span>
+                <span *ngIf="userForm.controls['lName'].errors?.['minlength'] && userForm.controls['lName'].touched">Min Char 5 Required</span>
+            </div>
+        </div>
+        <div class="col-md-4">
+          <label >Username</label>
+          <div class="input-group has-validation">
+            <span class="input-group-text" >&#64;</span>
+            <input type="text" formControlName="uName" class="form-control" >
+            <div class="text-danger">
+              @if(userForm.controls['uName'].errors?.['pattern'] && userForm.controls['uName'].touched){
+                  <span>This is Required</span>
+              }
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label  >City</label>
+          <input type="text" formControlName="City" class="form-control">
+        </div>
+        <div class="col-md-3">
+          <label>State</label>
+          <select class="form-select" formControlName="State">
+            <option selected disabled value="">Choose...</option>
+            <option value="Bangalore">Bangalore</option>
+            <option value="Goa">Goa</option>
+            <option value="Tamil Nadu">Tamil Nadu</option>
+            <option value="Andhra Pradesh">Andhra Pradesh</option>
+          </select>
+        </div>
+        <div class="col-md-3">
+          <label  >Zip</label>
+          <input type="text" formControlName="ZipCode" class="form-control">
+        </div>
+        <div class="col-12">
+          <div class="form-check">
+            <input class="form-check-input" formControlName="IsTermsAgree" type="checkbox" >
+            <label class="form-check-label">
+              Agree to terms and conditions
+            </label>
+          </div>
+        </div>
+        <div class="col-12">
+          <button class="btn btn-primary" [disabled]="userForm.invalid" type="submit">Submit form</button>
+        </div>
+      </form>
+</div>
