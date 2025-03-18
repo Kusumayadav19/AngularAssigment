@@ -10,6 +10,7 @@ import { GetAppComponent } from './api/get-app/get-app.component';
 import { PostAppComponent } from './api/post-app/post-app.component';
 import { PutAppComponent } from './api/put-app/put-app.component';
 import { DeleteAppComponent } from './api/delete-app/delete-app.component';
+import { authGuard } from './pages/service/auth.guard';
 
 export const routes: Routes = [
     {
@@ -24,6 +25,7 @@ export const routes: Routes = [
     {
         path:'',
         component:LayoutComponent,
+        canActivate : [authGuard],
         children:[
             {
                 path:'dashboard',

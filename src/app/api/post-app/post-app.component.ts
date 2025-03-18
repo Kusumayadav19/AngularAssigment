@@ -1,44 +1,57 @@
-import { NgFor } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
-import { Component, inject} from '@angular/core';
+import { DatePipe, NgFor } from '@angular/common';
+import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import axios from 'axios';
+import { LoadCustomerService } from '../../pages/service/load-customer.service';
 
 @Component({
   selector: 'app-post-app',
-  imports: [NgFor, FormsModule],
+  standalone: true,
+  imports: [FormsModule, DatePipe, NgFor],
   templateUrl: './post-app.component.html',
-  styleUrl: './post-app.component.css'
+  styleUrls: ['./post-app.component.css']
 })
-export class PostAppComponent {
-  http = inject(HttpClient);
-  carList : any[] = []
-  carObj : any = {
-      "carId": 0,
-      "brand": "",
-      "model": "",
-      "year": 0,
-      "color": "",
-      "dailyRate": 0,
-      "carImage": "",
-      "RegNo": "",
-    }
 
-  getAllCars(){
-    this.http.get("https://freeapi.miniprojectideas.com/api/CarRentalApp/GetCars").subscribe((result:any)=>{
-      this.carList = result.data
-    })
+export class PostAppComponent {
+  employeeList: any[] = [];
+  employeeObj: any = {
+    employeeId: 0,
+    employeeName: "",
+    contactNo: "",
+    emailId: "",
+    deptId: 0,
+    password: "",
+    gender: "",
+    role: "",
+    createdDate: new Date().toISOString()
+  };
+
+  constructor(private loadCustomerService: LoadCustomerService) {
+    this.getAllEmployee();
   }
 
-  saveCar(){
-    debugger;
-    this.http.post("https://freeapi.miniprojectideas.com/api/CarRentalApp/UpdateCar",this.carObj).subscribe((res:any)=>{
-      debugger;
-      if(res.result){
-        alert("Add New User");
-        this.getAllCars();
-      }else{
-        alert(res.message)
+  async getAllEmployee() {
+    try {
+      const response = await this.loadCustomerService.loadCustomers();
+      this.employeeList = response || [];
+    } catch (error) {
+      console.error("Error fetching employees:", error);
+    }
+  }
+
+  async saveEmployee() {
+    try {
+      const response = await axios.post("https://projectapi.gerasim.in/api/EmployeeManagement/CreateEmployee", this.employeeObj);
+      
+      if (response.data.result) {
+        alert("Employee added successfully!");
+        await this.getAllEmployee();
+      } else {
+        alert(response.data.message);
       }
-    })
+    } catch (error) {
+      console.error("Error adding employee:", error);
+      alert("Failed to add employee.");
+    }
   }
 }

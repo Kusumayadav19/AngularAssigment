@@ -1,29 +1,23 @@
 import { NgFor } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { LoadCustomerService } from '../service/load-customer.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-employee',
-  imports:[NgFor],
+  standalone: true,
+  imports: [NgFor, FormsModule],
   templateUrl: './employee.component.html',
   styleUrls: ['./employee.component.css']
 })
-export class EmployeeComponent implements OnInit {
-    http = inject(HttpClient);
-    parentDept: any[] = [];
+export class EmployeeComponent {
+  userList: any[] = [];
+  
 
-    constructor() {}
+  constructor(private loadUser: LoadCustomerService) {}
 
-    ngOnInit() {
-      this.getParent();
-    }
+  async getCustomer() {
+    this.userList = await this.loadUser.loadCustomers() || [];
+  }
 
-    getParent() {
-      this.http.get("https://projectapi.gerasim.in/api/EmployeeManagement/GetParentDepartment")
-        .subscribe((result: any) => {
-          if (result && result.data) {
-            this.parentDept = result.data;
-          }
-        });
-    }
 }

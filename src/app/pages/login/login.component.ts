@@ -1,7 +1,7 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import axios from 'axios';
 
 @Component({
   selector: 'app-login',
@@ -10,24 +10,26 @@ import { Router } from '@angular/router';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-  loginObj : any ={
-    "username":"",
-    "password":""
+  loginObj: any = {
+    username: "",
+    password: ""
   };
 
-  http = inject(HttpClient);
   router = inject(Router);
 
-  onLogin(){
-    debugger;
-    this.http.post("https://projectapi.gerasim.in/api/EmployeeManagement/login", this.loginObj).subscribe((res:any)=>{
-      debugger;
-      if(res.result){
-        localStorage.setItem("employeeApp", JSON.stringify(res.data));  // Storing the credentials to local storage
+  async onLogin() {
+    try {
+      const response = await axios.post("https://projectapi.gerasim.in/api/EmployeeManagement/login", this.loginObj);
+      
+      if (response.data.result) { 
+        localStorage.setItem("userLogin", JSON.stringify(response.data.data)); // Store user data in local storage
         this.router.navigateByUrl('dashboard');
-      }else{
-        alert(res.message)
+      } else {
+        alert(response.data.message);
       }
-    })
+    } catch (error) {
+      console.error("Login failed:", error);
+      alert("An error occurred while logging in.");
+    }
   }
 }

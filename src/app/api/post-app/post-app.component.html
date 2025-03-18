@@ -1,80 +1,94 @@
 <div class="row">
     <div class="col-8 text-center">
-        <h2>Car Booking Details</h2>
     </div>
     <div class="col-4 text-end">
-        <button class="btn btn-success" (click)="getAllCars()">Get Car Booking</button>
+        <button class="btn btn-success" (click)="getAllEmployee()">Get Employees</button>
     </div>
 </div>
 
 <div class="row">
     <div class="col-8">
+        <h2>Employee Details</h2>
         <table class="table table-bordered border-dark">
             <thead class="table-dark">
                 <tr>
-                    <th>Reg No</th>
-                    <th>Daily Rate</th>
-                    <th>Brand</th>
-                    <th>Model</th>
-                    <th>Year</th>
+                    <th>Employee ID</th>
+                    <th>Name</th>
+                    <th>Contact No</th>
+                    <th>Email</th>
+                    <th>Department ID</th>
+                    <th>Role</th>
+                    <th>Created Date</th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let car of carList">
-                    <td>{{ car.regNo }}</td>
-                    <td>{{ car.dailyRate }}</td>
-                    <td>{{ car.brand }}</td>
-                    <td>{{ car.model }}</td>
-                    <td>{{ car.year }}</td>
+                <tr *ngFor="let emp of employeeList">
+                    <td>{{ emp.employeeId }}</td>
+                    <td>{{ emp.employeeName }}</td>
+                    <td>{{ emp.contactNo }}</td>
+                    <td>{{ emp.emailId }}</td>
+                    <td>{{ emp.deptId }}</td>
+                    <td>{{ emp.role }}</td>
+                    <td>{{ emp.createdDate | date:'short' }}</td>
                 </tr>
             </tbody>
         </table>
     </div>
 </div>
+
 <hr>
+
 <div class="container">
-    <h2 class="text-center">Car Rental Form</h2>
+    <h2 class="text-center">Employee Registration</h2>
 
     <div class="row">
         <div class="col-6 mt-2">
-            <label>Car ID</label>
-            <input type="number" [(ngModel)]="carObj.carId" class="form-control" placeholder="Enter Car ID">
+            <label>Employee ID</label>
+            <input type="number" [(ngModel)]="employeeObj.employeeId" class="form-control" placeholder="Enter Employee ID">
         </div>
         <div class="col-6 mt-2">
-            <label>Brand</label>
-            <input type="text" [(ngModel)]="carObj.brand" class="form-control" placeholder="Enter Brand">
+            <label>Name</label>
+            <input type="text" [(ngModel)]="employeeObj.employeeName" class="form-control" placeholder="Enter Name">
         </div>
         <div class="col-6 mt-2">
-            <label>Model</label>
-            <input type="text" [(ngModel)]="carObj.model" class="form-control" placeholder="Enter Model">
+            <label>Contact No</label>
+            <input type="text" [(ngModel)]="employeeObj.contactNo" class="form-control" placeholder="Enter Contact No">
         </div>
         <div class="col-6 mt-2">
-            <label>Year</label>
-            <input type="number" [(ngModel)]="carObj.year" class="form-control" placeholder="Enter Year">
+            <label>Email</label>
+            <input type="email" [(ngModel)]="employeeObj.emailId" class="form-control" placeholder="Enter Email">
         </div>
         <div class="col-6 mt-2">
-            <label>Color</label>
-            <input type="text" [(ngModel)]="carObj.color" class="form-control" placeholder="Enter Color">
+            <label>Department ID</label>
+            <input type="number" [(ngModel)]="employeeObj.deptId" class="form-control" placeholder="Enter Department ID">
         </div>
         <div class="col-6 mt-2">
-            <label>Daily Rate</label>
-            <input type="number" [(ngModel)]="carObj.dailyRate" class="form-control" placeholder="Enter Daily Rate">
+            <label>Password</label>
+            <input type="password" [(ngModel)]="employeeObj.password" class="form-control" placeholder="Enter Password">
         </div>
         <div class="col-6 mt-2">
-            <label>Car Image URL</label>
-            <input type="text" [(ngModel)]="carObj.carImage" class="form-control" placeholder="Enter Car Image URL">
+            <label>Gender</label>
+            <select [(ngModel)]="employeeObj.gender" class="form-control">
+                <option value="">Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+            </select>
         </div>
         <div class="col-6 mt-2">
-            <label>Registration Number</label>
-            <input type="text" [(ngModel)]="carObj.regNo" class="form-control" placeholder="Enter Registration Number">
+            <label>Role</label>
+            <input type="text" [(ngModel)]="employeeObj.role" class="form-control" placeholder="Enter Role">
+        </div>
+        <div class="col-6 mt-2">
+            <label>Created Date</label>
+            <input type="datetime-local" [(ngModel)]="employeeObj.createdDate" class="form-control">
         </div>
     </div>
 
     <div class="row">
         <div class="col-12 mt-2 text-center">
             <button class="btn btn-secondary m-2">Reset Form</button>
-            <button class="btn btn-success m-2" (click)="saveCar()">Save Car</button>
+            <button class="btn btn-success m-2" (click)="saveEmployee()">Save Employee</button>
         </div>
     </div>
 </div>
-
