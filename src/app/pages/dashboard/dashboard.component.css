@@ -79,4 +79,24 @@ body {
   td button {
     margin: 5px;
   }
+  .active {
+    background-color: green;
+    color: white;
+    font-weight: bold;
+    padding: 10px;
+  }
+  
+  .highlight {
+    border: 2px solid red;
+    background-color: yellow;
+  }
+  
+  .box {
+    width: 200px;
+    height: 100px;
+    text-align: center;
+    line-height: 100px;
+    margin-top: 20px;
+    border: 1px solid black;
+  }
   

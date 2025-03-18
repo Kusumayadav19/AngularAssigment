@@ -36,11 +36,17 @@ export class DashboardComponent {
   users = ["Kushhh","Manu","Harshith","Shivani","Chandana"]
 
   // Dynamically setting css class property using ngClass
-  isActive = false;
-  toggleClass(){
+  isActive: boolean = false;
+  isHighlighted: boolean = false;
+
+  toggleClass() {
     this.isActive = !this.isActive;
   }
 
+  toggleHighlight() {
+    this.isHighlighted = !this.isHighlighted;
+  }
+  
   // ngStyle allows dynamic styling based on component properties
   textColor = "blue";
   changeColor(){

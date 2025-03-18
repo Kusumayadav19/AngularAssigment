@@ -29,12 +29,24 @@
 <h2>Directive : *ngFor And Using Pipe</h2>
 <h3>Fetching List of Users</h3>
 <ul>
-<li *ngFor="let user of users">{{ user}}</li>
+<li *ngFor="let user of users">{{ user | uppercase}}></li>
 </ul>
 <hr>
 <!-- Ngclass -	[ngClass]="{ 'class1': condition, 'class2': condition }" -->
-<h2>Directive : ngClass</h2>  
-<button (click)="toggleClass()" [ngClass]="{ 'active': isActive }">Click me</button>
+<h2>Directive: ngClass</h2>  
+
+<button (click)="toggleClass()" [ngClass]="{ 'active': isActive }">
+  Toggle Active Class
+</button>
+
+<button (click)="toggleHighlight()" [ngClass]="{ 'highlight': isHighlighted, 'active': isActive }">
+  Toggle Highlight and Active
+</button>
+
+<div [ngClass]="{ 'box': true, 'active': isActive, 'highlight': isHighlighted }">
+box changes styles dynamically!
+</div>
+
 <hr>
 <!-- ngStyle allows dynamic styling based on component properties
  	[ngStyle]="{ 'property': value }" -->

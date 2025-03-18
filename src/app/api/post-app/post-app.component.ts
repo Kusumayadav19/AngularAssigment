@@ -1,4 +1,4 @@
-import { DatePipe, NgFor } from '@angular/common';
+import { DatePipe, NgFor} from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import axios from 'axios';
@@ -11,7 +11,6 @@ import { LoadCustomerService } from '../../pages/service/load-customer.service';
   templateUrl: './post-app.component.html',
   styleUrls: ['./post-app.component.css']
 })
-
 export class PostAppComponent {
   employeeList: any[] = [];
   employeeObj: any = {
@@ -26,32 +25,28 @@ export class PostAppComponent {
     createdDate: new Date().toISOString()
   };
 
+
   constructor(private loadCustomerService: LoadCustomerService) {
     this.getAllEmployee();
   }
 
   async getAllEmployee() {
-    try {
-      const response = await this.loadCustomerService.loadCustomers();
-      this.employeeList = response || [];
-    } catch (error) {
-      console.error("Error fetching employees:", error);
-    }
+    this.employeeList = await this.loadCustomerService.loadCustomers();
   }
 
   async saveEmployee() {
     try {
-      const response = await axios.post("https://projectapi.gerasim.in/api/EmployeeManagement/CreateEmployee", this.employeeObj);
+      const response = await axios.post("https://projectapi.gerasim.in/api/EmployeeManagement/UpdateEmployee/?", this.employeeObj);
       
       if (response.data.result) {
-        alert("Employee added successfully!");
+        alert("New car added successfully!");
         await this.getAllEmployee();
       } else {
         alert(response.data.message);
       }
     } catch (error) {
-      console.error("Error adding employee:", error);
-      alert("Failed to add employee.");
+      console.error("Error adding car:", error);
+      alert("Failed to add car.");
     }
   }
 }

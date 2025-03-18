@@ -29,12 +29,12 @@ export const routes: Routes = [
         children:[
             {
                 path:'dashboard',
-                component:DashboardComponent
+                loadComponent:()=> import("./pages/dashboard/dashboard.component").then(m => m.DashboardComponent)
             },
     
         {
             path:'employee',
-            component:EmployeeComponent
+            loadComponent:()=> import("./pages/employee/employee.component").then(m => m.EmployeeComponent),
         },
         {
             path:'project',
@@ -42,27 +42,27 @@ export const routes: Routes = [
         },
         {
             path:'forms',
-            component:FormsComponent
+            loadComponent:()=> import("./pages/forms/forms.component").then(m => m.FormsComponent),
         },
         {
             path:'reactiveForm',
-            component:ReactiveFormsComponent
+            loadComponent:()=> import("./pages/reactive-forms/reactive-forms.component").then(m=> m.ReactiveFormsComponent),
         },
         {
             path:'get-app',
-            component:GetAppComponent
+            loadComponent:()=> import("./api/get-app/get-app.component").then(m => m.GetAppComponent),
         },
         {
             path:'post-app',
-            component:PostAppComponent
+            loadComponent:()=> import("./api/post-app/post-app.component").then(m => m.PostAppComponent),
         },
         {
             path:'put-app',
-            component:PutAppComponent
+            loadComponent:()=> import("./api/put-app/put-app.component").then(m => m.PutAppComponent),
         },
         {
             path:'delete-app',
-            component:DeleteAppComponent
+            loadComponent:()=> import("./api/delete-app/delete-app.component").then(m => m.DeleteAppComponent),
         }
         ]
     }

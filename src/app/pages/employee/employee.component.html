@@ -1,33 +1,37 @@
-
 <div class="row">
-    <h1>Service Injection</h1>
-    <div class="col-3">
-        <button (click)="getCustomer()" class="btn btn-success">Load Users</button>
+    <div class="col-8 text-center">
+    </div>
+    <div class="col-4 text-end">
+        <!-- <button class="btn btn-success">Get Employees</button> -->
     </div>
 </div>
-<hr>
+
 <div class="row">
-    <div class="col-6">
-        <table class="table table-bordered border-dark" >
+    <div class="col-8">
+        <h2>Using Load-customer Service </h2>
+        <table class="table table-bordered border-dark">
             <thead class="table-dark">
-            <tr>
-                <th>Sr No</th>
-                <th>Name</th>
-                <th>User Name</th>
-                <th>Email</th>
-                <th>Phone no</th>
-                <th>Website</th>
-            </tr>
+                <tr>
+                    <th>Employee ID</th>
+                    <th>Name</th>
+                    <th>Contact No</th>
+                    <th>Email</th>
+                    <th>Department ID</th>
+                    <th>Role</th>
+                    <th>Created Date</th>
+                </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let user of userList; let i = index">
-                    <td>{{ i + 1 }}</td>
-                    <td>{{ user.name }}</td>
-                    <td>{{ user.username }}</td>
-                    <td>{{ user.email }}</td>
-                    <td>{{ user.phone }}</td>
-                    <td>{{ user.website }}</td>
+                <tr *ngFor="let emp of employeeList">
+                    <td>{{ emp.employeeId }}</td>
+                    <td>{{ emp.employeeName }}</td>
+                    <td>{{ emp.contactNo }}</td>
+                    <td>{{ emp.emailId }}</td>
+                    <td>{{ emp.deptId }}</td>
+                    <td>{{ emp.role }}</td>
+                    <td>{{ emp.createdDate | date:'short' }}</td>
                 </tr>
             </tbody>
         </table>
     </div>
+</div>

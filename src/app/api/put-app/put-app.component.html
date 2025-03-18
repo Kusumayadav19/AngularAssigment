@@ -1,89 +1,90 @@
 <div class="row">
     <div class="col-8 text-center">
-        <h2>Post API Integration Using Template Form</h2>
     </div>
-    <div class="col-4">
-        <button class="btn btn-success" (click)="getAllUsers()">Get Bus Booking</button>
+    <div class="col-4 text-end">
+        <!-- <button class="btn btn-success" (click)="getAllEmployee()">Get Employees</button> -->
     </div>
 </div>
+
 <div class="row">
-    <div class="col-6">
+    <div class="col-8">
+        <h2>Employee Details</h2>
         <table class="table table-bordered border-dark">
             <thead class="table-dark">
                 <tr>
-                    <th>User Id</th>
-                    <th>User Name</th>
-                    <th>Email ID</th>
+                    <th>Employee ID</th>
+                    <th>Name</th>
+                    <th>Contact No</th>
+                    <th>Email</th>
+                    <th>Department ID</th>
                     <th>Role</th>
-                    <th>Project Name</th>
-                    <th>Actions</th>
+                    <th>Created Date</th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let user of userList; let i = index">
-                    <td>{{ user.userId }}</td>
-                    <td>{{ user.userName }}</td>
-                    <td>{{ user.emailId }}</td>
-                    <td>{{ user.role }}</td>
-                    <td>{{ user.projectName }}</td>
-                    <td>
-                        <button class="btn btn-success" (click)="onEdit($event)">Edit</button>
-
-                    </td>
+                <tr *ngFor="let emp of employeeList">
+                    <td>{{ emp.employeeId }}</td>
+                    <td>{{ emp.employeeName }}</td>
+                    <td>{{ emp.contactNo }}</td>
+                    <td>{{ emp.emailId }}</td>
+                    <td>{{ emp.deptId }}</td>
+                    <td>{{ emp.role }}</td>
+                    <td>{{ emp.createdDate | date:'short' }}</td>
                 </tr>
             </tbody>
         </table>
     </div>
 </div>
-
-<hr>
-
 <div class="container">
-    <div class="col-6 mt-2">
-        <label>User ID</label>
-        <input type="text" [(ngModel)]="busBooking.userId" class="form-control" placeholder="Enter User ID">
+    <h2 class="text-center">Update Employee</h2>
+    
+    <div class="row">
+        <div class="col-6 mt-2">
+            <label>Employee ID</label>
+            <input type="number" [(ngModel)]="employeeObj.employeeId" class="form-control" placeholder="Enter Employee ID" required>
+        </div>
+        <div class="col-6 mt-2">
+            <label>Name</label>
+            <input type="text" [(ngModel)]="employeeObj.employeeName" class="form-control" placeholder="Enter Name">
+        </div>
+        <div class="col-6 mt-2">
+            <label>Contact No</label>
+            <input type="text" [(ngModel)]="employeeObj.contactNo" class="form-control" placeholder="Enter Contact No">
+        </div>
+        <div class="col-6 mt-2">
+            <label>Email</label>
+            <input type="email" [(ngModel)]="employeeObj.emailId" class="form-control" placeholder="Enter Email">
+        </div>
+        <div class="col-6 mt-2">
+            <label>Department ID</label>
+            <input type="number" [(ngModel)]="employeeObj.deptId" class="form-control" placeholder="Enter Department ID">
+        </div>
+        <div class="col-6 mt-2">
+            <label>Password</label>
+            <input type="password" [(ngModel)]="employeeObj.password" class="form-control" placeholder="Enter Password">
+        </div>
+        <div class="col-6 mt-2">
+            <label>Gender</label>
+            <select [(ngModel)]="employeeObj.gender" class="form-control">
+                <option value="">Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+        <div class="col-6 mt-2">
+            <label>Role</label>
+            <input type="text" [(ngModel)]="employeeObj.role" class="form-control" placeholder="Enter Role">
+        </div>
+        <div class="col-6 mt-2">
+            <label>Created Date</label>
+            <input type="datetime-local" [(ngModel)]="employeeObj.createdDate" class="form-control">
+        </div>
     </div>
-    <div class="col-6 mt-2">
-        <label>User Name</label>
-        <input type="text" [(ngModel)]="busBooking.userName" class="form-control" placeholder="Enter User Name">
-    </div>
-    <div class="col-6 mt-2">
-        <label>Email ID</label>
-        <input type="email" [(ngModel)]="busBooking.emailId" class="form-control" placeholder="Enter Email ID">
-    </div>
-    <div class="col-6 mt-2">
-        <label>Full Name</label>
-        <input type="text" [(ngModel)]="busBooking.fullName" class="form-control" placeholder="Enter Full Name">
-    </div>
-    <div class="col-6 mt-2">
-        <label>Role</label>
-        <input type="text" [(ngModel)]="busBooking.role" class="form-control" placeholder="Enter Role">
-    </div>
-    <div class="col-6 mt-2">
-        <label>Created Date</label>
-        <input type="datetime-local" [(ngModel)]="busBooking.createdDate" class="form-control">
-    </div>
-    <div class="col-6 mt-2">
-        <label>Password</label>
-        <input type="password" [(ngModel)]="busBooking.password" class="form-control" placeholder="Enter Password">
-    </div>
-    <div class="col-6 mt-2">
-        <label>Project Name</label>
-        <input type="text" [(ngModel)]="busBooking.projectName" class="form-control" placeholder="Enter Project Name">
-    </div>
-    <div class="col-6 mt-2">
-        <label>Refresh Token</label>
-        <input type="text" [(ngModel)]="busBooking.refreshToken" class="form-control" placeholder="Enter Refresh Token">
-    </div>
-    <div class="col-6 mt-2">
-        <label>Refresh Token Expiry Time</label>
-        <input type="datetime-local" [(ngModel)]="busBooking.refreshTokenExpiryTime" class="form-control">
-    </div>
-</div>
 
-<div class="row">
-    <div class="col-12 mt-2 text-center">
-        <button class="btn btn-secondary m-2">Reset Form</button>
-        <button class="btn btn-success m-2" (click)="saveUser()">Save User</button>
+    <div class="row">
+        <div class="col-12 mt-2 text-center">
+            <button class="btn btn-primary m-2" (click)="updateEmployee()">Update Employee</button>
+        </div>
     </div>
 </div>

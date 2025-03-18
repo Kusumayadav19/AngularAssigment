@@ -1,1 +1,40 @@
-<p>delete-app works!</p>
+<div class="container">
+    <h2 class="text-center">Delete Employee</h2>
+
+    <div class="row">
+        <div class="col-6 mt-2">
+            <label>Employee ID</label>
+            <input type="number" [(ngModel)]="employeeIdToDelete" class="form-control" placeholder="Enter Employee ID">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12 mt-2 text-center">
+            <button class="btn btn-danger m-2" (click)="deleteEmployee()">Delete Employee</button>
+        </div>
+    </div>
+
+    <h3 class="text-center mt-4">Employee List</h3>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Contact No</th>
+                <th>Email</th>
+                <th>Department ID</th>
+                <th>Role</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let employee of employeeList">
+                <td>{{ employee.employeeId }}</td>
+                <td>{{ employee.employeeName }}</td>
+                <td>{{ employee.contactNo }}</td>
+                <td>{{ employee.emailId }}</td>
+                <td>{{ employee.deptId }}</td>
+                <td>{{ employee.role }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

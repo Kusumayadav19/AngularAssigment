@@ -1,48 +1,59 @@
-import { NgFor, NgIf } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
-import { Component, inject } from '@angular/core';
+import { DatePipe, NgFor } from '@angular/common';
+import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import axios from 'axios';
+import { LoadCustomerService } from '../../pages/service/load-customer.service';
 
 @Component({
-  selector: 'app-put-app',
-  imports: [FormsModule, NgFor],
+  selector: 'app-put-api',
+  standalone: true,
+  imports: [FormsModule,NgFor, DatePipe],
   templateUrl: './put-app.component.html',
-  styleUrl: './put-app.component.css'
+  styleUrls: ['./put-app.component.css']
 })
 export class PutAppComponent {
-  http = inject(HttpClient);
-
-  userList : any[] = []
-  busBooking : any = {
-      "userId": 0,
-      "userName": "",
-      "emailId": "",
-      "fullName": "",
-      "role": "",
-      "createdDate": "",
-      "password": "",
-      "projectName": "",
-      "refreshToken": "",
-      "refreshTokenExpiryTime": ""
+  employeeList : any[] = []
+  employeeObj: any = {
+    employeeId: 0,
+    employeeName: "",
+    contactNo: "",
+    emailId: "",
+    deptId: 0,
+    password: "",
+    gender: "",
+    role: "",
+    createdDate: new Date().toISOString()
+  };
+  constructor(private loadCustomerService: LoadCustomerService) {
+      this.getAllEmployee();
     }
-
-  getAllUsers(){
-    this.http.get("https://projectapi.gerasim.in/api/BusBooking/GetAllUsers").subscribe((result:any)=>{
-      this.userList = result.data
-    })
-  }
-
-  saveUser(){
-    this.http.post("https://projectapi.gerasim.in/api/BusBooking/AddNewUser",this.busBooking).subscribe((res:any)=>{
-      if(res.result){
-        alert("Add New User");
-        this.getAllUsers();
+  
+    async getAllEmployee() {
+      try {
+        const response = await this.loadCustomerService.loadCustomers();
+        this.employeeList = response || [];
+      } catch (error) {
+        console.error("Error fetching employees:", error);
       }
-    })
+    }
+  async updateEmployee() {
+    try {
+      if (!this.employeeObj.employeeId) {
+        alert("Employee ID is required to update!");
+        return;
+      }
+      const response = await axios.put(
+        `https://projectapi.gerasim.in/api/EmployeeManagement/UpdateEmployee/${this.employeeObj.employeeId}`,
+        this.employeeObj
+      );
+      if (response.status === 200) {
+        alert("Employee updated successfully!");
+      } else {
+        alert("Failed to update employee.");
+      }
+    } catch (error) {
+      console.error("Error updating employee:", error);
+      alert("An error occurred while updating the employee.");
+    }
   }
-
-  onEdit(data : any){
-    this.busBooking = data;
-  }
-
 }
